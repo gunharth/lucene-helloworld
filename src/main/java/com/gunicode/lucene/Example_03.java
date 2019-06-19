@@ -1,7 +1,6 @@
 package com.gunicode.lucene;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -29,7 +28,6 @@ public class Example_03
         StandardAnalyzer standardAnalyzer = new StandardAnalyzer();
         String inputFilePath = "src/main/java/com/gunicode/lucene/example_03_input.txt";
         String outputDir = "example_03_output";
-        //File file = new File(inputFilePath);
         FileReader file = new FileReader(inputFilePath);
 
         Directory directory = FSDirectory.open(Paths.get(outputDir));
@@ -39,15 +37,11 @@ public class Example_03
         IndexWriter writer = new IndexWriter(directory, config);
 
         Document document = new Document();
-       // FileReader file = new FileReader(inputFilePath);
-        //
-        try (BufferedReader br = new BufferedReader(file)) {
-            //BufferedReader br = new BufferedReader(file);
 
+        try (BufferedReader br = new BufferedReader(file)) {
             document.add(new TextField("content", br));
             writer.addDocument(document);
             writer.close();
-
         }
         catch (IOException e) {
             e.printStackTrace();

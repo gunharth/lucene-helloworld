@@ -44,7 +44,6 @@ public class Example_01
         }
     }
 
-
     private void searchAndDisplay(String searchText) throws Exception{
         System.out.println("Query: " + searchText);
         //query
@@ -62,12 +61,10 @@ public class Example_01
             System.out.println(doc.get(fieldName));
         }
         //is.close();
-
     }
 
     public static void main(String[] args)
     {
-        System.out.println("Test");
         Example_01 hl = new Example_01("example_01_output");
         try {
             hl.index();
@@ -77,6 +74,5 @@ public class Example_01
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }
