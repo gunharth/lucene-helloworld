@@ -15,17 +15,16 @@ import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.store.ByteBuffersDirectory;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.RAMDirectory;
 
 public class Example_02
 {
-
     public static void main(String[] args) throws IOException, ParseException {
         //New index
-
         StandardAnalyzer standardAnalyzer = new StandardAnalyzer();
-        Directory directory = new RAMDirectory();
+        Directory directory = new ByteBuffersDirectory();
         IndexWriterConfig config = new IndexWriterConfig(standardAnalyzer);
         //Create a writer
         IndexWriter writer = new IndexWriter(directory, config);
@@ -42,6 +41,7 @@ public class Example_02
         IndexReader reader = DirectoryReader.open(directory);
         IndexSearcher searcher = new IndexSearcher (reader);
         QueryParser parser = new QueryParser ("content", standardAnalyzer);
+
         Query query = parser.parse("Hello");
         TopDocs results = searcher.search(query, 5);
         System.out.println("Hits for Hello -->" + results.totalHits);
